@@ -2,6 +2,7 @@ import requests
 import time
 from flask import Flask, request, redirect, render_template
 from user_agent import generate_user_agent
+from flask_cors import CORS
 from pyfiglet import Figlet
 from colorama import Fore
 
@@ -9,6 +10,7 @@ f = Figlet(font='epic')
 print(Fore.BLUE + f.renderText('DeskRam'))
 
 app = Flask(__name__)
+CORS(app)
 
 def generate_enc_password(password):
     time_now = int(time.time())
