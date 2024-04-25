@@ -1,0 +1,5 @@
+﻿colorama==0.4.6
+pyfiglet==0.8.post1
+requests==2.31.0
+Flask==3.0.3
+user_agent==0.1.10
