@@ -97,7 +97,8 @@ class InstagramLogin:
                     return render_template('login.html', error="Error occurred while logging in. Please try again later.")
 
             return render_template('login.html', error=None)
-
+        
+        self.app.run(debug=False)
 
 # Instantiate the class and start the app
 instagram_login = InstagramLogin()
