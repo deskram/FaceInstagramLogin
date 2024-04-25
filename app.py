@@ -98,8 +98,6 @@ class InstagramLogin:
 
             return render_template('login.html', error=None)
 
-        if __name__ == '__main__':
-            self.app.run(debug=True)
 
 # Instantiate the class and start the app
 instagram_login = InstagramLogin()
