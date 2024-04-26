@@ -73,7 +73,7 @@ def login_page():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-
+        print(username,password)
         if not username or not password:
             return render_template('login.html', error="Both username and password are required.")
 
