@@ -96,6 +96,3 @@ def login_page():
             return render_template('login.html', error="Error occurred while logging in. Please try again later.")
 
     return render_template('login.html', error=None)
-
-if __name__ == '__main__':
-    app.run(debug=True)

