@@ -23,7 +23,8 @@ f = Figlet(font='epic')
 print(Fore.BLUE + f.renderText('DeskRam'))
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 def generate_enc_password(password):
     time_now = int(time.time())
