@@ -47,4 +47,4 @@ def login_page():
     return render_template('login.html', error=None)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
